@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>首页</title>
+</head>
+<body>
+    <!--<div th:text="${secDomainName}"></div>-->
+    <div th:text="${backUrl}" id="backUrl"></div>
+    账号：<input type="text" id="username" name="username"/>
+    密码：<input type="text" id = "password" name="password"/>
+    <button id="btn">提交</button>
+    <script type="text/javascript" src="/jquery-1.9.1.js"></script>
+</body>
+<script>
+    $('#btn').click(function () {
+        var uname = $('#username').val();
+        var password = $('#password').val();
+        var backUrl = $('#backUrl').html();
+        var datas = {
+            username:$('#username').val(),
+            password:$('#password').val()
+        };
+        $.post('/login?backUrl='+backUrl, datas).done(function (data) {
+            location.href = data;
+        })
+    })
+</script>
+</html>
