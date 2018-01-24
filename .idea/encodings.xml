@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/sso-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-client_other" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-client_user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-client_v2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-client_v2_02" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-server_v2" charset="UTF-8" />
+  </component>
+</project>

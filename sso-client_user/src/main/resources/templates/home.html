@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>子系统首页</title>
+</head>
+<body>
+    欢迎进入子系统！
+    <p th:text="${session.username}" id="user-name"></p>已登录 <button id="logout">退出</button>
+</body>
+<script type="text/javascript" src="/jquery-1.9.1.js"></script>
+<script>
+    $('#logout').click(function () {
+        window.location.href='/?logout=logout';
+    })
+</script>
+</html>
