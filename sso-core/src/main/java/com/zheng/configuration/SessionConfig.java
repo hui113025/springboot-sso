@@ -1,4 +1,4 @@
-package com.zheng.utils;
+package com.zheng.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,8 @@ public class SessionConfig {
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
         cookieSerializer.setCookieName("SSOSESSIONID");//cookies名称
         cookieSerializer.setCookieMaxAge(1800);//过期时间(秒)
-        cookieSerializer.setDomainName("haofenvip.com");
+        //如果是域名需设置一级域名
+//        cookieSerializer.setDomainName("zheng.com");
         strategy.setCookieSerializer(cookieSerializer);
         return strategy;
     }

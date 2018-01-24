@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
@@ -23,12 +22,11 @@ public class LoginController {
      *
      * @param mv
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping("/page/login")
-    public ModelAndView home(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("backUrl", request.getParameter("backUrl"));
+    public ModelAndView home(ModelAndView mv, HttpServletRequest request) {
+        request.setAttribute("callbackURL", request.getParameter("callbackURL"));
         mv.setViewName("home");
         return mv;
     }
@@ -54,7 +52,7 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String backUrl = request.getParameter("backUrl") + "?token=" + token;
+        String backUrl = request.getParameter("callbackURL") + "?token=" + token;
         return backUrl;
     }
 

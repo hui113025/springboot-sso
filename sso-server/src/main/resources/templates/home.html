@@ -6,7 +6,7 @@
 </head>
 <body>
     <!--<div th:text="${secDomainName}"></div>-->
-    <div th:text="${backUrl}" id="backUrl"></div>
+    <div th:text="${callbackURL}" id="callback-url"></div>
     账号：<input type="text" id="username" name="username"/>
     密码：<input type="text" id = "password" name="password"/>
     <button id="btn">提交</button>
@@ -16,12 +16,12 @@
     $('#btn').click(function () {
         var uname = $('#username').val();
         var password = $('#password').val();
-        var backUrl = $('#backUrl').html();
+        var callbackURL = $('#callback-url').html();
         var datas = {
             username:$('#username').val(),
             password:$('#password').val()
         };
-        $.post('/login?backUrl='+backUrl, datas).done(function (data) {
+        $.post('/login?callbackURL='+callbackURL, datas).done(function (data) {
             location.href = data;
         })
     })

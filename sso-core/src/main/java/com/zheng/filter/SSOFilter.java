@@ -17,13 +17,13 @@ import java.util.Map;
  * Created by zhenghui on 2018/1/18.
  */
 public class SSOFilter implements Filter {
-    private final String SSO_SERVER_DOMAIN = "http://test1.haofenvip.com"; //认证中心地址 sso-server-url
+    private final String SSO_SERVER_DOMAIN = "http://127.0.0.1"; //认证中心地址 sso-server-url （spring-session支持ip和子域名）
     private final String SSO_SERVER_LOGIN_URL = SSO_SERVER_DOMAIN + "/page/login"; //认证中心登录地址 sso-server-url
     private final String SSO_SERVER_VERIFY_URL = SSO_SERVER_DOMAIN + "/verify"; //子系统验证地址 sso-server-verify-url
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("==>LoginFilter启动");
+        System.out.println("==>SSOFilter启动");
     }
 
     @Override
@@ -32,10 +32,8 @@ public class SSOFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         String uri = req.getRequestURI();
-        uri = (uri.length() == 1 ? "" : uri);
         String serverUrl = "//" + request.getServerName() + ":" + request.getServerPort();
-        String returnUrl = serverUrl + uri;
-        String backUrl = SSO_SERVER_LOGIN_URL + "?backUrl=" + returnUrl;
+        String callbackURL = serverUrl + (uri.length() == 1 ? "" : uri);
 
         if (req.getParameter("logout") != null && session != null) {
             session.invalidate();
@@ -47,7 +45,7 @@ public class SSOFilter implements Filter {
         if (StringUtils.isNotEmpty(token)) {
             // 去sso认证中心校验token
             if (this.verify(token)) {
-                res.sendRedirect(returnUrl);
+                res.sendRedirect(callbackURL);
                 return;
             }
         }
@@ -56,7 +54,7 @@ public class SSOFilter implements Filter {
             filterChain.doFilter(req, res);
             return;
         }
-        res.sendRedirect(backUrl);
+        res.sendRedirect(SSO_SERVER_LOGIN_URL + "?callbackURL=" + callbackURL);
     }
 
     @Override
